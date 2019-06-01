@@ -44,6 +44,18 @@ export default class JiraField extends React.PureComponent {
     render() {
         const field = this.props.field;
 
+        // this.setstate({junktest: true});
+
+        // only allow these custom types until handle further types
+        if (field.schema.custom &&
+              (field.schema.custom !== 'com.atlassian.jira.plugin.system.customfieldtypes:textarea' &&
+               field.schema.custom !== 'com.atlassian.jira.plugin.system.customfieldtypes:textfield' &&
+               field.schema.custom !== 'com.atlassian.jira.plugin.system.customfieldtypes:select' &&
+               field.schema.custom !== 'com.pyxis.greenhopper.jira:gh-epic-label' &&
+               field.schema.custom !== 'com.atlassian.jira.plugin.system.customfieldtypes:project')
+        ) {
+            return null;
+        }
         if (field.schema.system === 'description') {
             return (
                 <Input
@@ -88,7 +100,7 @@ export default class JiraField extends React.PureComponent {
         }
 
         // if this.props.field has allowedValues, then props.value will be an object
-        if (field.allowedValues && field.allowedValues.length) {
+        if (field.allowedValues && field.allowedValues.length && field.schema.type !== 'array') {
             const options = field.allowedValues.map(this.makeReactSelectValue);
 
             return (

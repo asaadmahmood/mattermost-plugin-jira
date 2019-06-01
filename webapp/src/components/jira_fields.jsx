@@ -27,7 +27,7 @@ export default class JiraFields extends React.PureComponent {
         }
 
         return fieldNames.map((fieldName) => {
-            if (fieldName === 'project' || fieldName === 'issuetype' || fieldName === 'reporter' || (fieldName !== 'description' && !this.props.fields[fieldName].required)) {
+            if (fieldName === 'project' || fieldName === 'issuetype') {
                 return null;
             }
             return (

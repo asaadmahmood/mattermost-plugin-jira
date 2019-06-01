@@ -16,6 +16,7 @@ const initialState = {
     submitting: false,
     projectKey: null,
     issueType: null,
+    required_fields_not_covered: 'send this error',
     fields: {
         description: '',
         project: {
@@ -62,6 +63,7 @@ export default class CreateIssueModal extends PureComponent {
         const issue = {
             post_id: this.props.post.id,
             fields: this.state.fields,
+            required_fields_not_covered: 'send this error',
         };
 
         this.setState({submitting: true});
